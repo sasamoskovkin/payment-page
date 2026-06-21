@@ -18,64 +18,95 @@
         }
         .card {
             background: white;
-            padding: 40px 35px 30px;
+            padding: 35px 30px 30px;
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            text-align: center;
             max-width: 420px;
             width: 100%;
-            transition: 0.3s;
         }
-        .card .logo {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-        .card h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 6px;
-        }
-        .card .sub {
-            color: #6b7280;
-            font-size: 14px;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
         }
-        .card .sum {
-            font-size: 36px;
+        .card-header .logo-text {
+            font-size: 20px;
             font-weight: 700;
             color: #1a1a2e;
-            margin: 16px 0 8px;
         }
-        .card .sum small {
-            font-size: 18px;
-            font-weight: 400;
-            color: #6b7280;
-        }
-        .card .status {
-            display: inline-block;
-            background: #d1fae5;
-            color: #065f46;
-            padding: 6px 18px;
+        .card-header .secure {
+            font-size: 13px;
+            color: #16a34a;
+            background: #dcfce7;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin: 12px 0 16px;
         }
-        .card .order-info {
-            background: #f9fafb;
+        .amount-block {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .amount-block .label { font-size: 13px; color: #64748b; }
+        .amount-block .sum {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .amount-block .sum small { font-size: 18px; font-weight: 400; color: #64748b; }
+        .amount-block .order-id { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 4px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e2e8f0;
             border-radius: 10px;
-            padding: 14px;
-            margin: 16px 0 20px;
-            font-size: 14px;
-            color: #374151;
-            text-align: left;
+            font-size: 15px;
+            transition: 0.2s;
+            background: white;
         }
-        .card .order-info span {
-            float: right;
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+        .form-row .form-group { flex: 1; }
+
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin: 6px 0 4px;
+            flex-wrap: wrap;
+        }
+        .card-icons .icon {
+            background: #f1f5f9;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 12px;
             font-weight: 600;
+            color: #1e293b;
+            letter-spacing: 0.3px;
         }
-        .card .btn {
+        .card-icons .icon.mir { color: #0f172a; }
+        .card-icons .icon.visa { color: #1a1a8a; }
+        .card-icons .icon.mc { color: #e11d2a; }
+        .card-icons .icon.sbp { color: #2563eb; }
+
+        .btn {
             background: #2563eb;
             color: white;
             border: none;
@@ -86,22 +117,27 @@
             cursor: pointer;
             width: 100%;
             transition: 0.2s;
+            margin-top: 6px;
         }
-        .card .btn:hover { background: #1d4ed8; }
-        .card .btn:active { transform: scale(0.97); }
-        .card .btn.success {
+        .btn:hover { background: #1d4ed8; }
+        .btn:active { transform: scale(0.97); }
+        .btn.success {
             background: #16a34a;
             cursor: default;
         }
-        .card .btn.success:hover { background: #16a34a; }
-        .card .note {
+        .btn.success:hover { background: #16a34a; }
+
+        .footer-note {
             font-size: 12px;
-            color: #9ca3af;
-            margin-top: 20px;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: 18px;
         }
-        .card .note strong { color: #6b7280; }
+        .footer-note strong { color: #64748b; }
+
+        .hidden { display: none; }
+
         .loader {
-            display: none;
             border: 3px solid #f3f4f6;
             border-top: 3px solid #2563eb;
             border-radius: 50%;
@@ -111,42 +147,140 @@
             margin: 0 auto;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .success-block {
+            text-align: center;
+            padding: 16px 0 8px;
+        }
+        .success-block .check {
+            font-size: 56px;
+        }
+        .success-block h2 {
+            color: #16a34a;
+            font-size: 22px;
+            margin: 8px 0 4px;
+        }
+        .success-block p {
+            color: #64748b;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 
 <div class="card" id="paymentCard">
-    <div class="logo">💳</div>
-    <h1>Оплата заказа</h1>
-    <div class="sub">Корпоративное кафе</div>
-
-    <div class="sum" id="amount">1 250 <small>₽</small></div>
-    <div class="status">✅ Платёж успешно обработан</div>
-
-    <div class="order-info">
-        📦 Заказ № <span id="orderId">#KFC-2025-001</span><br>
-        👤 Получатель: <span id="customerName">Александр Московкин</span>
+    <!-- ШАПКА -->
+    <div class="card-header">
+        <span class="logo-text">💳 Оплата</span>
+        <span class="secure">🔒 Защищено</span>
     </div>
 
-    <button class="btn success" id="payBtn">✅ Оплачено</button>
+    <!-- СУММА И ЗАКАЗ -->
+    <div class="amount-block">
+        <div class="label">Сумма к оплате</div>
+        <div class="sum" id="amount">1 250 <small>₽</small></div>
+        <div class="order-id">Заказ № <span id="orderId">KFC-2025-001</span></div>
+    </div>
 
-    <div class="note">
-        <strong>Тестовый режим</strong> • Сумма не списана
+    <!-- ИКОНКИ БАНКОВ -->
+    <div class="card-icons">
+        <span class="icon visa">VISA</span>
+        <span class="icon mc">MasterCard</span>
+        <span class="icon mir">МИР</span>
+        <span class="icon sbp">СБП</span>
+        <span class="icon" style="background:#e2e8f0;">Apple Pay</span>
+        <span class="icon" style="background:#e2e8f0;">GPay</span>
+    </div>
+
+    <!-- ФОРМА ВВОДА КАРТЫ -->
+    <div id="formBlock">
+        <div class="form-group">
+            <label>Номер карты</label>
+            <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" value="4111 1111 1111 1111">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Срок</label>
+                <input type="text" id="cardDate" placeholder="MM/YY" maxlength="5" value="12/26">
+            </div>
+            <div class="form-group">
+                <label>CVC</label>
+                <input type="text" id="cardCvc" placeholder="***" maxlength="3" value="123">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Владелец карты</label>
+            <input type="text" id="cardHolder" placeholder="IVANOV IVAN" value="MOSKOVKIN ALEKSANDR">
+        </div>
+
+        <button class="btn" id="payBtn">💳 Оплатить</button>
+    </div>
+
+    <!-- БЛОК УСПЕШНОЙ ОПЛАТЫ (появляется после нажатия) -->
+    <div id="successBlock" class="hidden success-block">
+        <div class="check">✅</div>
+        <h2>Платёж успешно проведён</h2>
+        <p>Заказ №<span id="successOrderId">KFC-2025-001</span> оплачен</p>
+        <p style="margin-top:12px;font-size:13px;color:#94a3b8;">Спасибо! Ваш заказ передан на кухню.</p>
+        <div style="margin-top:16px;font-size:12px;color:#94a3b8;">Тестовый режим • Сумма не списана</div>
+    </div>
+
+    <div class="footer-note">
+        <strong>🔒 Тестовый режим</strong> • Данные карты не сохраняются
     </div>
 </div>
 
 <script>
     // ===== НАСТРОЙКИ (меняйте под себя) =====
     const orderData = {
-        orderId: '#KFC-2025-001',
-        customerName: 'Александр Московкин',
+        orderId: 'KFC-2025-001',
         amount: '1 250'
     };
     // ========================================
 
     document.getElementById('orderId').textContent = orderData.orderId;
-    document.getElementById('customerName').textContent = orderData.customerName;
     document.getElementById('amount').innerHTML = orderData.amount + ' <small>₽</small>';
+    document.getElementById('successOrderId').textContent = orderData.orderId;
+
+    // Обработка нажатия "Оплатить"
+    document.getElementById('payBtn').addEventListener('click', function() {
+        // Показываем, что идёт оплата
+        this.textContent = '⏳ Обработка...';
+        this.disabled = true;
+        this.style.opacity = '0.7';
+
+        setTimeout(() => {
+            // Скрываем форму, показываем успех
+            document.getElementById('formBlock').classList.add('hidden');
+            document.getElementById('successBlock').classList.remove('hidden');
+        }, 800);
+    });
+
+    // Форматирование номера карты (пробелы)
+    document.getElementById('cardNumber').addEventListener('input', function(e) {
+        let val = this.value.replace(/\s/g, '').replace(/\D/g, '');
+        let formatted = '';
+        for (let i = 0; i < val.length && i < 16; i++) {
+            if (i > 0 && i % 4 === 0) formatted += ' ';
+            formatted += val[i];
+        }
+        this.value = formatted;
+    });
+
+    // Форматирование срока (MM/YY)
+    document.getElementById('cardDate').addEventListener('input', function(e) {
+        let val = this.value.replace(/\D/g, '');
+        if (val.length >= 2) {
+            this.value = val.substring(0,2) + '/' + val.substring(2,4);
+        } else {
+            this.value = val;
+        }
+    });
+
+    // Только цифры для CVC
+    document.getElementById('cardCvc').addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '').substring(0,3);
+    });
 </script>
 
 </body>
