@@ -102,9 +102,9 @@
             letter-spacing: 0.3px;
         }
         .card-icons .icon.mir { color: #0f172a; }
-        .card-icons .icon.visa { color: #1a1a8a; }
-        .card-icons .icon.mc { color: #e11d2a; }
         .card-icons .icon.sbp { color: #2563eb; }
+        .card-icons .icon.apple { color: #1a1a1a; }
+        .card-icons .icon.gpay { color: #1a1a8a; }
 
         .btn {
             background: #2563eb;
@@ -136,17 +136,6 @@
         .footer-note strong { color: #64748b; }
 
         .hidden { display: none; }
-
-        .loader {
-            border: 3px solid #f3f4f6;
-            border-top: 3px solid #2563eb;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .success-block {
             text-align: center;
@@ -182,12 +171,12 @@
         <div class="order-id">Заказ № <span id="orderId">KFC-2025-001</span></div>
     </div>
 
-    <!-- ИКОНКИ БАНКОВ -->
+    <!-- ИКОНКИ БАНКОВ (без Visa и Mastercard) -->
     <div class="card-icons">
         <span class="icon mir">МИР</span>
         <span class="icon sbp">СБП</span>
-        <span class="icon" style="background:#e2e8f0;">Apple Pay</span>
-        <span class="icon" style="background:#e2e8f0;">GPay</span>
+        <span class="icon apple">Apple Pay</span>
+        <span class="icon gpay">Google Pay</span>
     </div>
 
     <!-- ФОРМА ВВОДА КАРТЫ -->
@@ -214,7 +203,7 @@
         <button class="btn" id="payBtn">💳 Оплатить</button>
     </div>
 
-    <!-- БЛОК УСПЕШНОЙ ОПЛАТЫ (появляется после нажатия) -->
+    <!-- БЛОК УСПЕШНОЙ ОПЛАТЫ -->
     <div id="successBlock" class="hidden success-block">
         <div class="check">✅</div>
         <h2>Платёж успешно проведён</h2>
@@ -229,32 +218,28 @@
 </div>
 
 <script>
-    // ===== НАСТРОЙКИ (меняйте под себя) =====
+    // ===== НАСТРОЙКИ =====
     const orderData = {
         orderId: 'KFC-2025-001',
-        amount: '1 250'
+        amount: '200'
     };
-    // ========================================
+    // =====================
 
     document.getElementById('orderId').textContent = orderData.orderId;
     document.getElementById('amount').innerHTML = orderData.amount + ' <small>₽</small>';
     document.getElementById('successOrderId').textContent = orderData.orderId;
 
-    // Обработка нажатия "Оплатить"
     document.getElementById('payBtn').addEventListener('click', function() {
-        // Показываем, что идёт оплата
         this.textContent = '⏳ Обработка...';
         this.disabled = true;
         this.style.opacity = '0.7';
 
         setTimeout(() => {
-            // Скрываем форму, показываем успех
             document.getElementById('formBlock').classList.add('hidden');
             document.getElementById('successBlock').classList.remove('hidden');
         }, 800);
     });
 
-    // Форматирование номера карты (пробелы)
     document.getElementById('cardNumber').addEventListener('input', function(e) {
         let val = this.value.replace(/\s/g, '').replace(/\D/g, '');
         let formatted = '';
@@ -265,7 +250,6 @@
         this.value = formatted;
     });
 
-    // Форматирование срока (MM/YY)
     document.getElementById('cardDate').addEventListener('input', function(e) {
         let val = this.value.replace(/\D/g, '');
         if (val.length >= 2) {
@@ -275,7 +259,6 @@
         }
     });
 
-    // Только цифры для CVC
     document.getElementById('cardCvc').addEventListener('input', function(e) {
         this.value = this.value.replace(/\D/g, '').substring(0,3);
     });
